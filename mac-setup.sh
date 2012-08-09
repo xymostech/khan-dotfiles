@@ -94,7 +94,7 @@ cd ~/khan/
 
 echo "Cloning stable"
 # get the stable branch
-hg clone -q https://khanacademy.kilnhg.com/Code/Website/Group/stable stable 2>/dev/null || (cd stable; hg pull -q -u)
+hg clone -q https://$hg_email@khanacademy.kilnhg.com/Code/Website/Group/stable stable 2>/dev/null || (cd stable; hg pull -q -u)
 
 echo "Setting up your .hgrc.local"
 # make the dummy certificate
