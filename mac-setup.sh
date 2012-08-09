@@ -50,6 +50,7 @@ if [ "$looks_good" != "y" ]; then
 	exit 1
 fi
 
+echo
 
 # get user's name/email
 read -p "Enter your full name: " name
