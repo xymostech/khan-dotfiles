@@ -90,7 +90,6 @@ pip -q install Mercurial
 echo "Making khan directory"
 # start building our directory
 mkdir -p ~/khan/
-cd ~/khan/
 
 echo "Setting up your .hgrc.local"
 # make the dummy certificate
@@ -108,11 +107,11 @@ echo "%include ~/.hgrc.local" >> ~/.hgrc
 
 echo "Cloning stable"
 # get the stable branch
-hg clone -q https://$hg_email@khanacademy.kilnhg.com/Code/Website/Group/stable stable 2>/dev/null || (cd stable; hg pull -q -u)
+hg clone -q https://$hg_email@khanacademy.kilnhg.com/Code/Website/Group/stable ~/khan/stable 2>/dev/null || (cd stable; hg pull -q -u)
 
 echo "Installing requirements"
 # install requirements into the virtualenv
-pip -q install -r stable/requirements.txt
+pip -q install -r ~/khan/stable/requirements.txt
 
 echo "Setting up ssh keys"
 
@@ -133,16 +132,13 @@ read
 
 echo "Getting development tools"
 # download a bunch of developer tools
-mkdir -p devtools 
-cd devtools
-git clone -q https://github.com/Khan/kiln-review 2>/dev/null || (cd kiln-review; git pull -q)
-hg clone -q https://bitbucket.org/brendan/mercurial-extensions-rdiff 2>/dev/null || (cd mercurial-extensions-rdiff; hg -q pull -u)
-git clone -q https://github.com/Khan/khan-linter 2>/dev/null || (cd khan-linter; git pull -q)
-git clone -q https://github.com/Khan/arcanist 2>/dev/null || (cd arcanist; git pull -q)
-git clone -q https://github.com/Khan/libphutil.git 2>/dev/null || (cd libphutil; git pull -q)
-curl -s https://khanacademy.kilnhg.com/Tools/Downloads/Extensions > /tmp/extensions.zip && unzip -qo /tmp/extensions.zip kiln_extensions/kilnauth.py
-
-cd ~/khan
+mkdir -p ~/khan/devtools
+git clone -q https://github.com/Khan/kiln-review ~/khan/devtools/kiln-review 2>/dev/null || (cd ~/khan/devtools/kiln-review; git pull -q)
+hg clone -q https://bitbucket.org/brendan/mercurial-extensions-rdiff ~/khan/devtools/mercurial-extensions-rdiff 2>/dev/null || (cd ~/khan/devtools/mercurial-extensions-rdiff; hg -q pull -u)
+git clone -q https://github.com/Khan/khan-linter ~/khan/devtools/khan-linter 2>/dev/null || (cd ~/khan/devtools/khan-linter; git pull -q)
+git clone -q https://github.com/Khan/arcanist ~/khan/devtools/arcanist 2>/dev/null || (cd ~/khan/devtools/arcanist; git pull -q)
+git clone -q https://github.com/Khan/libphutil.git ~/khan/devtools/libphutil 2>/dev/null || (cd ~/khan/devtools/libphutil; git pull -q)
+curl -s https://khanacademy.kilnhg.com/Tools/Downloads/Extensions > /tmp/extensions.zip && (cd ~/khan/devtools; unzip -qo /tmp/extensions.zip ~/khan/devtools/kiln_extensions/kilnauth.py)
 
 echo "Installing nginx"
 # install nginx
