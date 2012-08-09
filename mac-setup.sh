@@ -92,10 +92,6 @@ echo "Making khan directory"
 mkdir -p ~/khan/
 cd ~/khan/
 
-echo "Cloning stable"
-# get the stable branch
-hg clone -q https://$hg_email@khanacademy.kilnhg.com/Code/Website/Group/stable stable 2>/dev/null || (cd stable; hg pull -q -u)
-
 echo "Setting up your .hgrc.local"
 # make the dummy certificate
 yes "" | openssl req -new -x509 -extensions v3_ca -keyout /dev/null -out dummycert.pem -days 3650 -passout pass:pass 2> /dev/null
@@ -109,6 +105,10 @@ username = $name <$hg_email>
 cacerts = /etc/hg-dummy-cert.pem" > ~/.hgrc.local
 
 echo "%include ~/.hgrc.local" >> ~/.hgrc
+
+echo "Cloning stable"
+# get the stable branch
+hg clone -q https://$hg_email@khanacademy.kilnhg.com/Code/Website/Group/stable stable 2>/dev/null || (cd stable; hg pull -q -u)
 
 echo "Installing requirements"
 # install requirements into the virtualenv
