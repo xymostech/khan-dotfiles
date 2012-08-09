@@ -231,8 +231,11 @@ if [ "$install_gae" == "y" ]; then
 	cp -r /Volumes/GoogleAppEngineLauncher-*/GoogleAppEngineLauncher.app /Applications/
 	hdiutil detach /Volumes/GoogleAppEngineLauncher-* > /dev/null
 
-	echo "Set up the Google App Engine Launcher according to the website."
-	open "https://sites.google.com/a/khanacademy.org/forge/for-khan-employees/-new-employees-onboard-doc/developer-setup/launching-your-test-site"
+	curl -s "https://www.dropbox.com/s/ruwcqsq2fqhv6sv/current.sqlite" -o ~/khan/stable/datastore/current.sqlite
+	mkdir -p ~/Library/Application\ Support/GoogleAppEngineLauncher
+	cat ~/khan/devtools/khan-dotfiles/GAEProjects.plist | sed "s/%USER/$USER/" > ~/Library/Application\ Support/GoogleAppEngineLauncher/Projects.plist
+
+	echo "Let Google App Engine launcher do its setup"
 	open -a GoogleAppEngineLauncher
 fi
 
