@@ -141,10 +141,10 @@ if [ "$setup_mercurial" == "y" ]; then
 	rm dummycert.pem
 	# setup the .hgrc
 	echo "[ui]
-	username = $name <$hg_email>
+username = $name <$hg_email>
 
-	[web]
-	cacerts = /etc/hg-dummy-cert.pem" > ~/.hgrc.local
+[web]
+cacerts = /etc/hg-dummy-cert.pem" > ~/.hgrc.local
 
 	echo "%include ~/.hgrc.local" >> ~/.hgrc
 fi
@@ -209,10 +209,10 @@ if [ "$install_nginx" == "y" ]; then
 	# if not done before, add the new hosts to /etc/hosts
 	if ! grep -q "ka.local" /etc/hosts; then
 		echo "# KA local servers
-	127.0.0.1       exercises.ka.local
-	::1             exercises.ka.local
-	127.0.0.1       stable.ka.local
-	::1             stable.ka.local" | sudo tee -a /etc/hosts >/dev/null
+127.0.0.1       exercises.ka.local
+::1             exercises.ka.local
+127.0.0.1       stable.ka.local
+::1             stable.ka.local" | sudo tee -a /etc/hosts >/dev/null
 	fi
 
 	# copy the launch plist
