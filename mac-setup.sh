@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
-echo "Running Khan Installation Script 1.0"
-echo "Warning: This is only tested on Mac OS 10.7 (Lion)"
+echo "Running Khan Installation Script 1.1"
+echo "Warning: This is only tested on Mac OS 10.8 (Mountain Lion)"
 echo "  After each statement, either something will open for you to"
 echo "    interact with, or a script will run for you to use"
 echo "  Press enter when a download/install is completed to go to"
