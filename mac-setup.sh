@@ -170,9 +170,9 @@ sudo launchctl load -w /Library/LaunchDaemons/homebrew.mxcl.nginx.plist
 
 echo "Setting up App Engine Launcher"
 curl -s http://googleappengine.googlecode.com/files/GoogleAppEngineLauncher-1.6.6.dmg > ~/Downloads/GoogleAppEngineLauncher-1.6.6.dmg
-hdiutil attach ~/Downloads/GoogleAppEngineLauncher-1.6.6.dmg
+hdiutil attach ~/Downloads/GoogleAppEngineLauncher-1.6.6.dmg > /dev/null
 cp -r /Volumes/GoogleAppEngineLauncher-*/GoogleAppEngineLauncher.app /Applications/
-hdiutil detach /Volumes/GoogleAppEngineLauncher-*
+hdiutil detach /Volumes/GoogleAppEngineLauncher-* > /dev/null
 
 echo "Set up the Google App Engine Launcher according to the website."
 open "https://sites.google.com/a/khanacademy.org/forge/for-khan-employees/-new-employees-onboard-doc/developer-setup/launching-your-test-site"
