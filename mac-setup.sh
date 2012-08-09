@@ -138,6 +138,7 @@ hg clone -q https://bitbucket.org/brendan/mercurial-extensions-rdiff ~/khan/devt
 git clone -q https://github.com/Khan/khan-linter ~/khan/devtools/khan-linter 2>/dev/null || (cd ~/khan/devtools/khan-linter; git pull -q)
 git clone -q https://github.com/Khan/arcanist ~/khan/devtools/arcanist 2>/dev/null || (cd ~/khan/devtools/arcanist; git pull -q)
 git clone -q https://github.com/Khan/libphutil.git ~/khan/devtools/libphutil 2>/dev/null || (cd ~/khan/devtools/libphutil; git pull -q)
+git clone -q https://github.com/Khan/khan-dotfiles.git ~/khan/devtools/khan-dotfiles 2>/dev/null || (cd ~/khan/devtools/khan-dotfiles; git pull -q)
 curl -s https://khanacademy.kilnhg.com/Tools/Downloads/Extensions > /tmp/extensions.zip && (cd ~/khan/devtools; unzip -qo /tmp/extensions.zip ~/khan/devtools/kiln_extensions/kilnauth.py)
 
 echo "Installing nginx"
@@ -150,7 +151,7 @@ sudo cp /usr/local/etc/nginx/nginx.conf /usr/local/etc/nginx/nginx.conf.old
 
 echo "Setting up nginx"
 # setup the nginx configuration file
-cat nginx.conf | sed "s/%USER/$USER/" > /usr/local/etc/nginx/nginx.conf
+cat ~/khan/devtools/khan-dotfiles/nginx.conf | sed "s/%USER/$USER/" > /usr/local/etc/nginx/nginx.conf
 
 # if not done before, add the new hosts to /etc/hosts
 if ! grep -q "ka.local" /etc/hosts; then
