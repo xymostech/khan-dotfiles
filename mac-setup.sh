@@ -81,17 +81,11 @@ echo "Setting up virtualenv"
 # make a virtualenv
 virtualenv -q --python=/usr/bin/python2.7 ~/.virtualenv/khan27
 echo "source ~/.virtualenv/khan27/bin/activate" >> ~/.bash_profile
-
-# our function to activate virtualenv
-virtenv() {
-	source ~/.virtualenv/khan27/bin/activate
-}
+source ~/.virtualenv/khan27/bin/activate
 
 echo "Installing mercurial in virtualenv"
-virtenv
 # install mercurial in virtualenv
 pip -q install Mercurial
-deactivate
 
 echo "Making khan directory"
 # start building our directory
@@ -117,10 +111,8 @@ cacerts = /etc/hg-dummy-cert.pem" > ~/.hgrc.local
 echo "%include ~/.hgrc.local" >> ~/.hgrc
 
 echo "Installing requirements"
-virtenv
 # install requirements into the virtualenv
 pip -q install -r stable/requirements.txt
-deactivate
 
 echo "Setting up ssh keys"
 
