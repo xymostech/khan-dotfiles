@@ -61,7 +61,7 @@ mkdir -p /usr/local/Cellar
 # export some useful directories
 export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 # put these in .bash_profile too
-echo "export PATH=/usr/local/sbin:/usr/local/bin:$$PATH" >> ~/.bash_profile
+echo "export PATH=/usr/local/sbin:/usr/local/bin:\$PATH" >> ~/.bash_profile
 
 # brew doctor
 brew doctor
