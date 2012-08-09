@@ -22,22 +22,24 @@ fi
 echo "Have you installed the XCode Command Line Tools package,"
 read -p "  or do you have a working version of gcc? y/n [n] " clt_installed
 
+CLT_LOCATION="https://developer.apple.com/downloads/download.action?path=Developer_Tools/command_line_tools_os_x_mountain_lion_for_xcode__august_2012/command_line_tools_for_xcode_os_x_mountain_lion_aug_2012.dmg"
+
 if [ "$clt_installed" != "y" ]; then
 	echo "Downloading Command Line Tools (log in to start the download)"
 	# download the command line tools
-	open "https://developer.apple.com/downloads/download.action?path=Developer_Tools/command_line_tools_for_xcode__june_2012/command_line_tools_for_xcode_june_2012.dmg"
+	open $CLT_LOCATION
 
 	read
 
 	echo "Running Command Line Tools Installer"
 
 	# attach the disk image
-	hdiutil attach ~/Downloads/command_line_tools_for_xcode_june_2012.dmg > /dev/null
+	hdiutil attach ~/Downloads/command_line_tools_for_xcode_os_x_mountain_lion_aug_2012.dmg > /dev/null
 	echo "Type your password to install:"
 	# install the command line tools
-	sudo installer -package /Volumes/Command\ Line\ Tools/Command\ Line\ Tools.mpkg -target /
+	sudo installer -package /Volumes/Command\ Line\ Tools\ \(Mountain\ Lion\)/Command\ Line\ Tools\ \(Mountain\ Lion\).mpkg -target /
 	# detach the disk image
-	hdiutil detach /Volumes/Command\ Line\ Tools/ > /dev/null
+	hdiutil detach /Volumes/Command\ Line\ Tools\ \(Mountain\ Lion\)/ > /dev/null
 fi
 
 echo "Opening Hipchat website (log in and click download to install)"
