@@ -225,13 +225,15 @@ if [ "$install_nginx" == "y" ]; then
 fi
 
 if [ "$install_gae" == "y" ]; then
+	APP_ENGINE_VERSION="1.7.0"
+
 	echo "Setting up App Engine Launcher"
-	curl -s http://googleappengine.googlecode.com/files/GoogleAppEngineLauncher-1.6.6.dmg > ~/Downloads/GoogleAppEngineLauncher-1.6.6.dmg
-	hdiutil attach ~/Downloads/GoogleAppEngineLauncher-1.6.6.dmg > /dev/null
+	curl -s http://googleappengine.googlecode.com/files/GoogleAppEngineLauncher-$APP_ENGINE_VERSION.dmg > ~/Downloads/GoogleAppEngineLauncher-$APP_ENGINE_VERSION.dmg
+	hdiutil attach ~/Downloads/GoogleAppEngineLauncher-$APP_ENGINE_VERSION.dmg > /dev/null
 	cp -r /Volumes/GoogleAppEngineLauncher-*/GoogleAppEngineLauncher.app /Applications/
 	hdiutil detach /Volumes/GoogleAppEngineLauncher-* > /dev/null
 
-	curl -s "https://www.dropbox.com/s/ruwcqsq2fqhv6sv/current.sqlite" -o ~/khan/stable/datastore/current.sqlite
+	curl -s "https://dl.dropbox.com/s/ruwcqsq2fqhv6sv/current.sqlite?dl=1" -o ~/khan/stable/datastore/current.sqlite
 	mkdir -p ~/Library/Application\ Support/GoogleAppEngineLauncher
 	cat ~/khan/devtools/khan-dotfiles/GAEProjects.plist | sed "s/%USER/$USER/" > ~/Library/Application\ Support/GoogleAppEngineLauncher/Projects.plist
 
