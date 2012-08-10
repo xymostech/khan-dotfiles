@@ -240,9 +240,9 @@ if [ "$install_gae" == "y" ]; then
 	cat ~/khan/devtools/khan-dotfiles/GAEProjects.plist | sed "s/%USER/$USER/" > ~/Library/Application\ Support/GoogleAppEngineLauncher/Projects.plist
 
 	(cd /Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/; unzip -qq google_appengine.zip; touch google_appengine)
-	mkdir -p /usr/local/bin
+	sudo mkdir -p /usr/local/bin
 	for script in api_server.py appcfg.py bulkload_client.py bulkloader.py dev_appserver.py download_appstats.py gen_protorpc.py google_sql.py remote_api_shell.py; do
-		ln -s /Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/$script /usr/local/bin/$script
+		sudo ln -s /Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/$script /usr/local/bin/$script
 	done
 
 fi
