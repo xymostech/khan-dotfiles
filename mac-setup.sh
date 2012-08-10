@@ -227,18 +227,24 @@ fi
 if [ "$install_gae" == "y" ]; then
 	APP_ENGINE_VERSION="1.7.0"
 
-	echo "Setting up App Engine Launcher"
+	echo "Installing Google App Engine Launcher"
 	curl -s http://googleappengine.googlecode.com/files/GoogleAppEngineLauncher-$APP_ENGINE_VERSION.dmg > ~/Downloads/GoogleAppEngineLauncher-$APP_ENGINE_VERSION.dmg
 	hdiutil attach ~/Downloads/GoogleAppEngineLauncher-$APP_ENGINE_VERSION.dmg > /dev/null
 	cp -r /Volumes/GoogleAppEngineLauncher-*/GoogleAppEngineLauncher.app /Applications/
 	hdiutil detach /Volumes/GoogleAppEngineLauncher-* > /dev/null
 
+	echo "Setting up Google App Engine Launcher"
+
 	curl -s "https://dl.dropbox.com/s/ruwcqsq2fqhv6sv/current.sqlite?dl=1" -o ~/khan/stable/datastore/current.sqlite
 	mkdir -p ~/Library/Application\ Support/GoogleAppEngineLauncher
 	cat ~/khan/devtools/khan-dotfiles/GAEProjects.plist | sed "s/%USER/$USER/" > ~/Library/Application\ Support/GoogleAppEngineLauncher/Projects.plist
 
-	echo "Let Google App Engine launcher do its setup"
-	open -a GoogleAppEngineLauncher
+	(cd /Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/; unzip -qq google_appengine.zip; touch google_appengine)
+	mkdir -p /usr/local/bin
+	for script in api_server.py appcfg.py bulkload_client.py bulkloader.py dev_appserver.py download_appstats.py gen_protorpc.py google_sql.py remote_api_shell.py; do
+		ln -s /Applications/GoogleAppEngineLauncher.app/Contents/Resources/GoogleAppEngine-default.bundle/Contents/Resources/google_appengine/$script /usr/local/bin/$script
+	done
+
 fi
 
 echo "You might be done!"
